@@ -31,7 +31,31 @@ public class CountryDAO {
 		return ar;
 	}
 	
-	public void getDetail() {
+	public CountryDTO getDetail(CountryDTO countryDTO) throws Exception {
+		
+		Connection con = DBConnection.getConnection();
+		String sql = "SELECT * FROM COUNTRIES WHERE COUNTRY_ID=? ";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, countryDTO.getCountry_id());
+		ResultSet rs = st.executeQuery();
+		
+		if(rs.next()) {
+			countryDTO.setCountry_id(rs.getString("COUNTRY_ID"));
+			countryDTO.setCountry_name(rs.getString("COUNTRY_NAME"));
+			countryDTO.setRegion_id(rs.getLong("REGION_ID"));
+		}else {
+			countryDTO=null;
+		}
+		
+		DBConnection.disConnection(rs, st, con);
+		
+		return countryDTO;
+		
+		
+		
+		
+		
+		
 		
 		
 		
