@@ -10,6 +10,36 @@ import com.winter.app.utils.DBConnection;
 
 public class CountryDAO {
 	
+	public int update(CountryDTO countryDTO) throws Exception {
+		int result=0;
+		
+		Connection con = DBConnection.getConnection();
+		String sql = "UPDATE COUNTRIES SET COUNTRY_NAME=?, REGION_ID=? WHERE COUNTRY_ID=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, countryDTO.getCountry_name());
+		st.setLong(2, countryDTO.getRegion_id());
+		result = st.executeUpdate();
+		
+		DBConnection.disConnection(st, con);
+		
+		return result;
+		
+	}
+	
+	public int delete(CountryDTO countryDTO) throws Exception {
+		int result = 0;
+		
+		Connection con = DBConnection.getConnection();
+		String sql = "DELETE COUNTRIES FROM COUNTRY_ID=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, countryDTO.getCountry_id());
+		result = st.executeUpdate();
+		
+		DBConnection.disConnection(st, con);
+		
+		return result;
+	}
+	
 	public int add(CountryDTO countryDTO) throws Exception {
 		int result = 0;
 		
