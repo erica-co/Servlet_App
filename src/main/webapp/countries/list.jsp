@@ -20,7 +20,7 @@
 
 
 <h1>Country List</h1>
-	<h3>표현식 자바의 변수나 값을 html로 출력할 때 사용</h3>
+	
 	<table>
 		<thead>
 			<tr>

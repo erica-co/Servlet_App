@@ -13,6 +13,8 @@
 	
 	<a href="/departments/list.jsp">Department List</a>
 	<a href="./locations/list.jsp">Location List</a>
+	<a href="./countries/list.jsp">country List</a>
+	
 	
 </body>
 </html>
