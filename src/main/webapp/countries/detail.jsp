@@ -23,7 +23,7 @@ countryDTO = countryDAO.getDetail(countryDTO);
 </head>
 <body>
 
-<h1>County Detail </h1>
+<h1>나라 상세정보 </h1>
 
 	<% if(countryDTO != null){ %>
 		<h3><%= countryDTO.getCountry_id() %></h3>
