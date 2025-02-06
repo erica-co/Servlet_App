@@ -41,7 +41,7 @@
 		</tbody>
 	</table>
 	<div>
-		<a href="./add.jsp">부서 등록</a>
+		<a href="./add.jsp">나라 등록</a>
 	</div>
 
 </body>

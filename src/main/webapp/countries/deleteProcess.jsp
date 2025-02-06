@@ -29,12 +29,12 @@ int result = countryDAO.delete(countryDTO);
 <body>
 
 	<%if(result>0){ %>
-		<h3>부서 삭제 성공</h3>
+		<h3>나라 삭제 성공</h3>
 	<%}else { %>
-		<h3>부서 삭제 실패</h3>
+		<h3>나라 삭제 실패</h3>
 	<%} %>
 	<a href="/">Home</a>
-	<a href="./list.jsp">부서 리스트</a>
+	<a href="./list.jsp">나라 리스트</a>
 
 </body>
 </html>

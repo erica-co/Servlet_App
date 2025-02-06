@@ -12,7 +12,7 @@ String region = request.getParameter("region_id");
 CountryDTO countryDTO = new CountryDTO();
 countryDTO.setCountry_id(id);
 countryDTO.setCountry_name(name);
-countryDTO.setRegion_id(Integer.parseInt(region));
+countryDTO.setRegion_id(Long.parseLong(region));
 
 CountryDAO countryDAO = new CountryDAO();
 int result = countryDAO.update(countryDTO);
