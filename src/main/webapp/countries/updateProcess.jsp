@@ -38,7 +38,7 @@ if(result > 0){
 
 	<h3><%= r %></h3>
 	<a href="/">Home</a>
-	<a href="./list.jsp">부서 리스트</a>
+	<a href="./list.jsp">나라 리스트</a>
 
 
 
