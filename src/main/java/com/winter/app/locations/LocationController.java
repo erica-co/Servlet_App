@@ -15,7 +15,7 @@ public class LocationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
+      * @see HttpServlet#HttpServlet()
      */
     public LocationController() {
         super();
@@ -26,13 +26,22 @@ public class LocationController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LocationDAO locationDAO = new LocationDAO();
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		try {String method = request.getMethod();
+			 StringBuffer sb = request.getRequestURL();
+			 String uri = request.getRequestURI();
+			 
+			 String coutry_id = request.getParameter("country_id");
+			
+			 String result =this.useSubString(uri);
+			 
+			LocationDAO locationDAO = new LocationDAO();
+		
 		//locationDAO.getList();
-		
-		String uri = request.getRequestURI();
-		
-		String result =this.useSubString(uri);
-		
+	}catch (Exception e) {
+		e.printStackTrace();
+		}
 	}
 
 	

@@ -2,17 +2,23 @@ package com.winter.app.locations;
 
 public class LocationDTO {
 	
-	private long street_address;
+	private long location_id;
+	private String street_address;
 	private String postal_code;
 	private String city;
 	private String state_province;
 	private String country_id;
 	
-	
-	public long getStreet_address() {
+	public long getLocation_id() {
+		return location_id;
+	}
+	public void setLocation_id(long location_id) {
+		this.location_id = location_id;
+	}
+	public String getStreet_address() {
 		return street_address;
 	}
-	public void setStreet_address(long street_address) {
+	public void setStreet_address(String street_address) {
 		this.street_address = street_address;
 	}
 	public String getPostal_code() {
@@ -39,6 +45,13 @@ public class LocationDTO {
 	public void setCountry_id(String country_id) {
 		this.country_id = country_id;
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

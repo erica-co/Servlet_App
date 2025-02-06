@@ -50,6 +50,10 @@ public class DepartmentController extends HttpServlet {
 		try{ String method = request.getMethod();
 		     StringBuffer sb= request.getRequestURL();
 		     String uri=request.getRequestURI();
+		     
+		     //parameter
+		     String department_id= request.getParameter("department_id");
+		     
 		     //System.out.println(method);
 		     //System.out.println(sb.toString());
 		     //System.out.println(uri);
