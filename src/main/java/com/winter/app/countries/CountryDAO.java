@@ -10,6 +10,27 @@ import com.winter.app.utils.DBConnection;
 
 public class CountryDAO {
 	
+	public int add(CountryDTO countryDTO) throws Exception {
+		int result = 0;
+		
+		Connection con = DBConnection.getConnection();
+		String sql = "INSERT INTO COUNTRIES (COUNTRY_ID, COUNTRY_NAME, REGION__ID)"
+				+ " VALUES (COUNTRIES_SEQ.NEXVAL,?,?,?)";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1,countryDTO.getCountry_id());
+		st.setString(2, countryDTO.getCountry_name());
+		st.setLong(3, countryDTO.getRegion_id());
+		
+		result = st.executeUpdate();
+		
+		DBConnection.disConnection(st, con);
+		
+		return result;
+			
+	}
+	
+	
+	
 	public List<CountryDTO> getList() throws Exception {
 		
 		Connection con = DBConnection.getConnection();
@@ -50,19 +71,6 @@ public class CountryDAO {
 		DBConnection.disConnection(rs, st, con);
 		
 		return countryDTO;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	}
 	
