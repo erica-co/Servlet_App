@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,eclipse,macos,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,eclipse,macos,java
 
+###My Ignore List###
+DBConnection.java
+
 ### Eclipse ###
 .metadata
 bin/

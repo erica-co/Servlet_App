@@ -10,7 +10,7 @@
 
 	<h1>location 추가 페이지</h1>
 	
-	<form action="./addProcess.jsp" method="post">
+	<form action="./addProcess.do" method="post">
 		<input type="text" name="STREET_ADDRESS" value="street_address">
 		<input type="text" name="STATE_PROVINCE]" value="state_province">
 		<input type="text" name="CITY" value="city">

@@ -5,11 +5,14 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.winter.app.ActionForward;
 
 /**
  * Servlet implementation class DepartmentController
@@ -17,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/DepartmentController")
 public class DepartmentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private DepartmentService departmentService;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -24,6 +29,7 @@ public class DepartmentController extends HttpServlet {
     public DepartmentController() {
         super();
         // TODO Auto-generated constructor stub 생성자
+        departmentService = new DepartmentService();
     }
 
 	/**
@@ -47,63 +53,89 @@ public class DepartmentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		try{ String method = request.getMethod();
-		     StringBuffer sb= request.getRequestURL();
-		     String uri=request.getRequestURI();
-		     
-		     //parameter
-		     String department_id= request.getParameter("department_id");
-		     
-		     //System.out.println(method);
-		     //System.out.println(sb.toString());
-		     //System.out.println(uri);
 		
-		     uri = this.useSubString(uri);
-		     //this.useSplit(uri);
-		     //this.useToken(uri);
+		//StringBuffer url = request.getRequestURL();
+		String uri = request.getRequestURI();
+		//System.out.println(url);
+		//System.out.println(uri);
 		
+		uri = uri.substring(uri.lastIndexOf("/")+1);
 		
-		     DepartmentDAO departmentDAO = new DepartmentDAO();
-		
-		     if(uri.equals("list.do")) {
-			    List<DepartmentDTO> list = departmentDAO.getList();
+		String path="";
+		ActionForward actionForward = new ActionForward();
+		actionForward.setFlag(true);
+		actionForward.setPath("/WEB-INF/views/errors/notfound.jsp");
+		try {
+		switch(uri) {
+		case "list.do":
 			
-			     PrintWriter writer = response.getWriter();
-			     writer.println("<h1>Department List</h1>");
-			     
-			     writer.println("<table border = 1px solid>");
-			     
-			     writer.println("<thead>");
-			     writer.println("<tr>");
-			     writer.println("<th>Dept ID</th> <th>Dept name</th>");
-			     writer.println("</tr>");
-			     writer.println("</thead>");
-			     
-			     writer.println("<tbody>");
-	
-			     
-			  for(int i=0; i<list.size(); i++) {
-				  	 writer.println("<tr>");
-				     writer.println("<td>" + list.get(i).getDepartment_id()+"</td>");
-				     writer.println("<td>"+ list.get(i).getDepartment_name()+"</td>");
-				     writer.println("</tr>");
-				     
-			  }
-				 writer.println("</tbody>");
-				 writer.println("</table>");
-				 writer.close();
+			departmentService.getList(request,actionForward);
 			
-			     
-		      }else {
-			       departmentDAO.getDetail();
-		      }
+			//attribute:속성 (키:string, 값:object) 다형성/클래스간 형변환
+			//
+			//request.setAttribute("list", ar);
+			
+			break;
+		case "detail.do":
+			
+			departmentService.getDetail(request,actionForward);
+			//request.setAttribute("dto", departmentDTO);
+			
+			break;
+		case "add.do":
+			String method = request.getMethod();
+			if (method.toUpperCase().equals("POST")) {
+				departmentService.add(request, actionForward);
+				
+			}else {
+				actionForward.setFlag(true);
+				actionForward.setPath("/WEB-INF/views/departments/add.jsp");
+			}
+			 break;
+		case "update.do":
+			String m = request.getMethod();
+			if (m.toUpperCase().equals("POST")) {
+				departmentService.updateProcess(request, actionForward);
+				
+			}else {
+				departmentService.update(request, actionForward);
+				
+			}
+			break;
+		case "delete.do":
+			departmentService.delete(request, actionForward);
+			break;
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(actionForward.getPath());
+		
+		RequestDispatcher view = request.getRequestDispatcher(actionForward.getPath());
+		view.forward(request, response);
+		
+//		if(uri.equals("list.do")) {
+//			
+//		}else if(uri.equals("detail.do")) {
+//			
+//		} 방법이 두개임(switch case랑 if)
 		
 		
-		//departmentDAO.getList();
-		//departmentDAO.getDetail();
+//		try {
+//			DepartmentDAO departmentDAO = new DepartmentDAO();
+//			List<DepartmentDTO> ar = departmentDAO.getList();
+//			//attribute:속성 (키:string, 값:object) 다형성/클래스간 형변환
+//			//
+//			request.setAttribute("list", ar);
+//			
+//			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/departments/list.jsp");
+//			view.forward(request, response);
+//		} catch (Exception e) {
+//			
+//			e.printStackTrace();
+//		}
+		
+		
 	}
 
 	/**
@@ -114,25 +146,6 @@ public class DepartmentController extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private String useSubString(String data) {
-		String result =  data.substring(data.lastIndexOf("/")+1); 
-		//+1하는 이유는 /를 출력하지 않기 위해서, 유일하게 useSubString만 /detail.do로 출력됨
-		System.out.println(result);
-		return result;
-	}
 	
-	private void useSplit (String data) {
-		String [] datas = data.split("/");
-		System.out.println(datas[datas.length-1]);
-	}
-
-	private void useToken(String data) {
-		StringTokenizer st = new StringTokenizer(data, "/");
-		String result ="";
-		while(st.hasMoreTokens()) {
-			result= st.nextToken();
-		}
-		System.out.println(result);
-		
-	}
+	
 }

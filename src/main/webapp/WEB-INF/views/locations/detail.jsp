@@ -27,11 +27,11 @@
 		<h3><%= locationDTO.getStreet_address()%></h3>
 		<h3><%= locationDTO.getState_province() %></h3>
 		
-		<a href="/update.jsp?location_id=<%= locationDTO.getLocation_id() %>">부서 수정</a>
-		<a href="./deleteProcess.jsp?country_id=<%= locationDTO.getCountry_id() %>">부서 삭제</a>
+		<a href="/update.do?location_id=<%= locationDTO.getLocation_id() %>">부서 수정</a>
+		<a href="./deleteProcess.do?country_id=<%= locationDTO.getCountry_id() %>">부서 삭제</a>
 		
 	<%}else { %>
-		<h3>없음</h3>
+		<h3>없는 위치</h3>
 	<%} %>
 	
 </body>

@@ -13,26 +13,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	table {
-		width: 50%;
-		margin: 0 auto;
-		border: 1px solid skyblue;
-		border-collapse: collapse;
-	}
-	
-	table th, table td {
-		border: 1px solid skyblue;
-		height: 40px;
-		text-align: center;
-	}
 
-
-
-</style>
+<%@include file="../template/common.jsp"%>
+<link rel="stylesheet" href="../resources/css/location_list.css">
 </head>
 <body>
-	<h1>Location List</h1>
+	<%@ include file="../template/header.jsp"%>
+	<section class="wrap_left contents">
+		<%@ include file="../template/nav.jsp"%>
+		<div class="right contents_right">
+			<div class="contents_right_list">
+	
 	<table>
 		<thead>
 			<tr>
@@ -46,7 +37,7 @@
 					<%= ar.get(i).getCountry_id()%>
 				</td>
 				<td>
-					<a href="./detail.jsp?location_id=<%=ar.get(i).getLocation_id()%>"><%= ar.get(i).getCity() %></a>
+					<a href="./detail.do?location_id=<%=ar.get(i).getLocation_id()%>"><%= ar.get(i).getCity() %></a>
 				</td>
 				<td>
 					<%= ar.get(i).getPostal_code() %>
@@ -56,7 +47,12 @@
 		</tbody>
 	</table>
 	<div>
-		<a href="./add.jsp">부서 등록</a>
+		<a href="./add.do">위치 등록</a>
 	</div>
+	
+	</section>
+
+	<%@ include file="../template/footer.jsp"%>
+	
 </body>
 </html>
