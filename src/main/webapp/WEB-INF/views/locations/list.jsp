@@ -1,13 +1,6 @@
-<%@page import="com.winter.app.locations.LocationDTO"%>
-<%@page import="java.util.List"%>
-<%@page import="com.winter.app.locations.LocationDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%
-	LocationDAO locationDAO = new LocationDAO ();
-	List<LocationDTO> ar = locationDAO.getList();
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,21 +24,23 @@
 			</tr>
 		</thead>
 		<tbody>
-				<%for(int i=0;i<ar.size();i++){ %>
-			<tr>
-				<td>
-					<%= ar.get(i).getCountry_id()%>
-				</td>
-				<td>
-					<a href="./detail.do?location_id=<%=ar.get(i).getLocation_id()%>"><%= ar.get(i).getCity() %></a>
-				</td>
-				<td>
-					<%= ar.get(i).getPostal_code() %>
-				</td>
-			</tr>
-			<%} %>
+			<c:forEach items="${list}" var="d" varStatus="st">
+				
+				<tr>
+					<td>
+						${pageScope.d.country_id }
+					</td>
+					<td>
+						<a href="./detail.do?location_id=${d.location_id}">${d.city}</a>
+					</td>
+					<td>
+						${d.postal_code}
+					</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
+	
 	<div>
 		<a href="./add.do">위치 등록</a>
 	</div>
