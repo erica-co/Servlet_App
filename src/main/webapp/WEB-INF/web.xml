@@ -36,6 +36,28 @@
   	<servlet-name>department</servlet-name>
   	<url-pattern>/departments/*</url-pattern>
   </servlet-mapping>
+  
+  <!-- locations -->
+  <servlet>
+  	<servlet-name>location</servlet-name>
+  	<servlet-class>com.winter.app.locations.LocationController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>location</servlet-name>
+  	<url-pattern>/locations/*</url-pattern>
+  </servlet-mapping>
+  
+  <!-- login, join -->
+  <servlet>
+  	<servlet-name>employee</servlet-name>
+  	<servlet-class>com.winter.app.employees.EmployeeController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>employee</servlet-name>
+  	<url-pattern>/employees/*</url-pattern>
+  </servlet-mapping>
 </web-app>
 
 

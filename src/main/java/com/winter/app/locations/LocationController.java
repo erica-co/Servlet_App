@@ -97,11 +97,5 @@ public class LocationController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	
-	private String useSubString(String data) {
-		String result = data.substring(data.lastIndexOf("/")+1);
-		System.out.println(result);
-		return result;
-	}
 
 }
